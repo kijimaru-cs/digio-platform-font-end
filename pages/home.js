@@ -17,9 +17,11 @@ export default function home() {
   const [dataLogin, setDataLogin] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3001/user/" + username).then((res) => {
-      setDataLogin(res.data);
-    });
+    axios
+      .get("https://digio-platform-back-end.herokuapp.com/user/" + username)
+      .then((res) => {
+        setDataLogin(res.data);
+      });
   }, []);
 
   function logout() {
@@ -35,7 +37,7 @@ export default function home() {
 
   function edit() {
     axios
-      .put("http://localhost:3001/user/" + username, {
+      .put("https://digio-platform-back-end.herokuapp.com/user/" + username, {
         editFirstName: editFirstName,
         editLastName: editLastName,
       })

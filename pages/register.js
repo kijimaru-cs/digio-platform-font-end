@@ -11,7 +11,7 @@ export default function register() {
 
   function Submit() {
     axios
-      .post("http://localhost:3001/reg_user", {
+      .post("https://digio-platform-back-end.herokuapp.com/reg_user", {
         username: { username },
         password: { password },
         firstName: { firstName },

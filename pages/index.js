@@ -11,7 +11,7 @@ export default function Home() {
   const [password, setPassword] = useState("");
   function Login() {
     axios
-      .post("http://localhost:3001/login_user", {
+      .post("https://digio-platform-back-end.herokuapp.com/login_user", {
         username: { username },
         password: { password },
       })
