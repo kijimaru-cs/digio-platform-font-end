@@ -2,6 +2,7 @@ import cookie from "js-cookie";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import Router from "next/router";
 import { render } from "react-dom";
 
 export default function home() {
@@ -33,13 +34,23 @@ export default function home() {
   }
 
   function edit() {
-    axios.put("http://localhost:3001/user/" + username).then((res) => {
-      if (res.data.error == true) {
-        setEditErrorMessage(res.data.message);
-      } else {
-        setEditErrorMessage(res.data.message);
-      }
-    });
+    axios
+      .put("http://localhost:3001/user/" + username, {
+        editFirstName: editFirstName,
+        editLastName: editLastName,
+      })
+      .then((res) => {
+        if (res.data.error == true) {
+          setEditErrorMessage(res.data.message);
+        } else {
+          setEditErrorMessage(res.data.message);
+          cookie.set("firstName", editFirstName, { expires: 2 });
+          cookie.set("lastName", editLastName, { expires: 2 });
+          firstName = editFirstName;
+          lastName = editLastName;
+          Router.reload();
+        }
+      });
   }
   if (username == "") {
     return <h1>Please Login</h1>;
